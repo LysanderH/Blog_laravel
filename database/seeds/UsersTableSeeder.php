@@ -17,13 +17,15 @@ class UsersTableSeeder extends Seeder
             'name' => 'Lysander',
             'email' => 'lysander.hans@hotmail.com',
             'password'=> Hash::make('azerty'),
-            'role'=>'Superadmin'
+            'role'=>'Superadmin',
+            'is_author'=>'true'
         ]);
         User::create([
             'name' => 'Do',
             'email' => 'dododo111@hotmail.com',
             'password'=> Hash::make('azerty'),
-            'role'=>'Editor'
+            'role'=>'Editor',
+            'is_author'=>'true'
         ]);
     }
 }

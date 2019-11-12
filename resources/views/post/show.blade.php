@@ -10,12 +10,12 @@
 <body>
 @component('components.main-navigation')
 @endcomponent
-<h1>{{$post->title}}</h1>
+<h1><a href="/posts/{{$post->id}}">{{$post->title}}</a></h1>
 <div>
     {{$post->content}}
 </div>
 <div>
-    <time datetime="{{$post->created_at}}"></time>{{$post->created_at->diffForHumans()}}
+    <time datetime="{{$post->published_at}}"></time>{{$post->published_at->diffForHumans()}}
 </div>
 <div>
     <p>

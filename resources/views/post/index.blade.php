@@ -13,10 +13,14 @@
 <h1>Home</h1>
 @component('components.main-navigation')
 @endcomponent
+<h2>Tous les {{$posts->total()}} articles</h2>
 <div>
     @foreach($posts as $post)
         <article>
             <h2><a href="/posts/{{$post->id}}">{{$post->title}}</a></h2>
+            <div>
+                <time datetime="{{$post->published_at}}"></time>{{$post->published_at->diffForHumans()}}
+            </div>
             <div>
                 <p>{{$post->content}}</p>
             </div>

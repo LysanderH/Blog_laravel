@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Post;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
@@ -13,7 +14,7 @@ class PostController extends Controller
     {
 
 //        $posts = Post::paginate(5);
-        $posts = Post::with('author')->paginate(5);
+        $posts = Post::published()->with('author')->paginate(5);
 
         return view('post.index', ['posts' => $posts]);
     }
@@ -29,24 +30,28 @@ class PostController extends Controller
         $post->slug = str::slug(request('title'), '-');
         $post->title = request('title');
         $post->content = request('content');
+        $published_at = request('published_at_date') . ' ' . \request('published_at_time') . ':00';
+        $post->published_at = $published_at;
         auth()->user()->posts()->save($post);
         return redirect('/');
     }
 
-    public function show(Post $post)
+    public function show($id)
     {
-
+//        $post = Post::published()->owned()->findOrFail($id);
+        $post = (new Post)->published()->findOrFail($id);
         return view('post.show', compact('post'));
     }
 
     public function edit(Post $post)
     {
-//        $this->authorize('update', $post);
+
         return view('post.edit', compact('post'));
     }
 
-    public function update(Post $post)
+    public function update($id)
     {
+        $post = Post::published()->findOrFail($id);
         $post->title = request('title');
         $post->content = request('content');
         $post->save();

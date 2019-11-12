@@ -23,6 +23,19 @@
     <div>
         <textarea type="text" id="content" name="content"></textarea>
     </div>
+    <div>
+        <label for="published_at_date">Quand voulez-vous publier cet article date</label>
+    </div>
+    <div>
+        <input type="time" name="published_at_time" id="published_at_time">
+
+    </div>
+    <div>
+        <label for="published_at_time">Quand voulez-vous publier cet article temps</label>
+    </div>
+    <div>
+        <input type="date" name="published_at_date" id="published_at_date">
+    </div>
     <div><input type="submit" value="enregistrer"></div>
 </form>
 
