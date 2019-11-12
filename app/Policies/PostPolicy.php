@@ -66,7 +66,9 @@ class PostPolicy
      */
     public function delete(User $user, Post $post)
     {
-        //
+        return $user->role === 'Superadmin';
+        // Ich will den Post nur dann löschen können, wenn ich als superadmin eingeloggt bin
+        // dazu muss ich den
     }
 
     /**

@@ -26,8 +26,10 @@
             @can('edit')
                 <a href="/posts/{{$post->id}}/edit">Bearbeiten ce post</a>
             @endcan
+            @can('delete')
+                <a href="/posts/{{$post->id}}/delete">Delete ce post</a>
+            @endcan
         @endauth
-        <a href="/posts/{{$post->id}}/delete">Delete ce post</a>
     @endforeach
     {{ $posts->links() }}
 </div>

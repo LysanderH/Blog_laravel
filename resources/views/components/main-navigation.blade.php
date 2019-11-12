@@ -5,4 +5,9 @@
     @auth
         <a href="/posts/create">Créer un post</a>
     @endauth
+    @if(auth())
+        <a href="/login">Connecter</a>
+    @else
+        <a href="/logout">Déconnecter</a>
+    @endif
 </div>

@@ -20,13 +20,12 @@ Route::post('/posts', 'PostController@store')->middleware('auth');
 Route::get('/posts/create', 'PostController@create')->middleware('auth');
 //route model binding
 Route::get('/author/{user}/posts', 'AuthorPostController@index');
-
 Route::get('/posts/{post}', 'PostController@show');
 Route::put('/posts/{post}', 'PostController@update');
 
 Route::get('/posts/{post}/edit', 'PostController@edit')->middleware('can:update,post');
 
-Route::post('/posts/{post}/delete','PostController@delete')->middleware('can:delete,post');
+Route::get('/posts/{post}/delete','PostController@delete')->middleware('can:delete,post');
 
 Auth::routes();
 
