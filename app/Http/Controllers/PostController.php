@@ -14,7 +14,7 @@ class PostController extends Controller
     {
 
 //        $posts = Post::paginate(5);
-        $posts = Post::published()->with('author')->paginate(5);
+        $posts = Post::with('author')->paginate(5);
 
         return view('post.index', ['posts' => $posts]);
     }
@@ -36,10 +36,9 @@ class PostController extends Controller
         return redirect('/');
     }
 
-    public function show($id)
+    public function show(Post $post)
     {
-//        $post = Post::published()->owned()->findOrFail($id);
-        $post = (new Post)->published()->findOrFail($id);
+        $post->load('author');
         return view('post.show', compact('post'));
     }
 
@@ -49,9 +48,9 @@ class PostController extends Controller
         return view('post.edit', compact('post'));
     }
 
-    public function update($id)
+    public function update(Post $post)
     {
-        $post = Post::published()->findOrFail($id);
+//        $post = Post::published()->findOrFail($id);
         $post->title = request('title');
         $post->content = request('content');
         $post->save();

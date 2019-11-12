@@ -4,6 +4,8 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Scope;
+use App\Scopes\PublishedScope;
 
 class Post extends Model
 {
@@ -12,16 +14,12 @@ class Post extends Model
 
 //    protected $guarded = [];
 
-    public function scopePublished($query)
+    protected static function boot()
     {
-//        if ($this->owner_id){
-//
-//        }
-        return $query->where('published_at', '<', NOW());
+        parent::boot();
+        static::addGlobalScope(new PublishedScope());
     }
-//    public function scopeOwned($query){
-//        return $query->
-//    }
+
     public function author()
     {
         return $this->belongsTo(User::class, 'owner_id');
